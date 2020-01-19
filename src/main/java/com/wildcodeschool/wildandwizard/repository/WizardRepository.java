@@ -8,6 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+//new: 
+@Repository
+
 
 public class WizardRepository implements WizardDao {
 
@@ -17,8 +22,8 @@ public class WizardRepository implements WizardDao {
             )
     );
 
-    @Autowired
-    //@Qualifier("videoReview")
+    
+    
     @Override
     public Wizard save(Wizard wizard) {
 
@@ -26,7 +31,7 @@ public class WizardRepository implements WizardDao {
         wizards.add(wizard);
         return wizard;
     }
-
+    
     @Override
     public Wizard findById(Long id) {
 
@@ -37,13 +42,13 @@ public class WizardRepository implements WizardDao {
         }
         return null;
     }
-
+    
     @Override
     public List<Wizard> findAll() {
 
         return wizards;
     }
-
+    
     @Override
     public Wizard update(Wizard wizard) {
 
@@ -61,6 +66,7 @@ public class WizardRepository implements WizardDao {
         }
         return null;
     }
+    
 
     @Override
     public void deleteById(Long id) {
@@ -73,3 +79,10 @@ public class WizardRepository implements WizardDao {
         }
     }
 }
+    
+    
+  
+    
+  
+    
+

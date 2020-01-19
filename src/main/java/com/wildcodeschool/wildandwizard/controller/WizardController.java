@@ -1,10 +1,12 @@
 package com.wildcodeschool.wildandwizard.controller;
 
 import com.wildcodeschool.wildandwizard.entity.Wizard;
+//new:
+import com.wildcodeschool.wildandwizard.repository.WizardDao;
 import com.wildcodeschool.wildandwizard.repository.WizardRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,13 +16,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WizardController {
+	
+	// old: private WizardRepository repository = new WizardRepository();
+	@Autowired
+    private WizardDao repository;
+	
+	
+    @GetMapping("/wizards")
+    public String getAll(Model model) {
 
-    // old: private WizardRepository repository = new WizardRepository();
+        model.addAttribute("wizards", repository.findAll());
+
+        return "wizards";
+    }
+	
+	
     //New: private ReviewDao repository = new WizardRepository();
 
     //@GetMapping("/wizards")
     // New: ===========================================
-    @Autowired
+    
     @Qualifier("wizardRepository")
     private ReviewDao repository;
     // new - ende =====================================
@@ -33,21 +48,6 @@ public class WizardController {
         return "wizards";
     }
     
-    
-    /* --> New in....================================================
-    @Controller
-public class NewsroomController {
-
-    @Autowired
-    private ReviewDao repository;
-
-    // code omitted...
-}
-    
-=====================================================================    
-    */
-    
-
     @GetMapping("/wizard")
     public String getWizard(Model model,
                             @RequestParam(required = false) Long id) {
@@ -60,7 +60,7 @@ public class NewsroomController {
 
         return "wizard";
     }
-
+    
     @PostMapping("/wizard")
     public String postWizard(@ModelAttribute Wizard wizard) {
 
@@ -71,6 +71,8 @@ public class NewsroomController {
         }
         return "redirect:/wizards";
     }
+    
+    
 
     @GetMapping("/wizard/delete")
     public String deleteWizard(@RequestParam Long id) {
@@ -86,3 +88,5 @@ public class NewsroomController {
         return "redirect:/wizards";
     }
 }
+	
+	
