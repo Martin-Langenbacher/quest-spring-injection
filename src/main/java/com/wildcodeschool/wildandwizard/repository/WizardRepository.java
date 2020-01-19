@@ -7,21 +7,39 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// new import: Autowire AND Repository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-//new: 
+
+//new: "@Repository==============================================================>>>>>>
+
 @Repository
+
+//new-Ende ============================================================================
+
+
+
+/* additional explanation:======================================================
+
+... it is necessary to annotate the WizardRepository class so that Spring knows that it should consider it
+for injection.
+The basic annotation here is @Component. However, Spring defines a number of other annotations that can be
+used as well, for example: @Service or @Repository.
+
+In a nutshell, these annotations are used to detail the role of the class, here it seems appropriate to use
+@Repository:
+================================================================================
+*/
 
 
 public class WizardRepository implements WizardDao {
 
-    private static List<Wizard> wizards = new ArrayList<>(
-            Arrays.asList(
-                    new Wizard(1L, "Harry", "Potter", new Date(80, 6, 31), "London", "", false)
-            )
-    );
-
+  private static List<Wizard> wizards = new ArrayList<>(
+          Arrays.asList(
+                  new Wizard(1L, "Harry", "Potter", new Date(80, 6, 31), "London", "", false)
+          )
+  );
     
     
     @Override
@@ -79,10 +97,7 @@ public class WizardRepository implements WizardDao {
         }
     }
 }
-    
-    
-  
-    
-  
-    
+
+
+ 
 
