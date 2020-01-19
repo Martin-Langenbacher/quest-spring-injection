@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 @Controller
 public class WizardController {
-	
-	// old: private WizardRepository repository = new WizardRepository();
+
+//old:    private WizardRepository repository = new WizardRepository();
 	@Autowired
     private WizardDao repository;
-	
-	
+
     @GetMapping("/wizards")
     public String getAll(Model model) {
 
@@ -29,24 +29,9 @@ public class WizardController {
 
         return "wizards";
     }
-	
-	
-    //New: private ReviewDao repository = new WizardRepository();
-
-    //@GetMapping("/wizards")
-    // New: ===========================================
     
-    @Qualifier("wizardRepository")
-    private ReviewDao repository;
-    // new - ende =====================================
+  
     
-    
-    public String getAll(Model model) {
-
-        model.addAttribute("wizards", repository.findAll());
-
-        return "wizards";
-    }
     
     @GetMapping("/wizard")
     public String getWizard(Model model,
@@ -88,5 +73,8 @@ public class WizardController {
         return "redirect:/wizards";
     }
 }
+
+
+
 	
 	
